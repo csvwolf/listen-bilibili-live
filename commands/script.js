@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const sendMail = require('../src/send-mail')
 const listenLive = require('../src/listen')
-const { mail, rooms } = require(`${process.cwd()}/config.json`)
+const { mail, rooms } = require('../config.json')
 const logger = require('../src/logger')
 
 module.exports = function() {
@@ -17,7 +17,7 @@ module.exports = function() {
         }
         status.rooms[LIVE_ID] = data.LIVE_STATUS
         logger.info('send mail...')
-        fs.writeFile(path.resolve(process.cwd(), 'status.json'), JSON.stringify(status), () => '')
+        fs.writeFile(path.resolve(__dirname, '../status.json'), JSON.stringify(status), () => '')
         return sendMail(mail, {
           subject: `你所监听的主播 ${data.ANCHOR_NICK_NAME} 状态改变`,
           html: `\

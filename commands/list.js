@@ -1,4 +1,4 @@
-const config = require(`${process.cwd()}/config.json`)
+const config = require('../config.json')
 
 module.exports = function(subKey) {
   return subKey ? config[subKey] : config
