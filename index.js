@@ -1,29 +1,54 @@
-const fs = require('fs')
-const path = require('path')
-const sendMail = require('./send-mail')
-const listenLive = require('./listen')
-const { mail, rooms } = require('./config.json')
+#!/usr/bin/env node
 
-rooms.forEach(LIVE_ID => {
-  listenLive(LIVE_ID)
-    .then(({ data }) => data.data)
-    .then(data => {
-      const status = require('./status.json')
-      if (status.rooms[LIVE_ID] === data.LIVE_STATUS) {
-        console.log(new Date(), 'not changed')
-        return {}
-      }
-      status.rooms[LIVE_ID] = data.LIVE_STATUS
-      console.log(new Date(), 'send mail...')
-      fs.writeFile(path.resolve(__dirname) + '/status.json', JSON.stringify(status), () => '')
-      return sendMail(mail, {
-        subject: `你所监听的主播 ${data.ANCHOR_NICK_NAME} 状态改变`,
-        html: `\
-          <h3>${data.ANCHOR_NICK_NAME} 的直播 ${data.LIVE_STATUS === 'LIVE' ? '已开始' : '已结束' }</h3>
-          <p>Title: ${data.ROOMTITLE}</p>
-          <a href="https://live.bilibili.com/${LIVE_ID}">传送门</a>
-        `
-      })
-    })
-    .catch(e => console.log(e))
-})
+const program = require('commander')
+const packageInfo = require('./package.json')
+const CMD = require('./commands/index')
+
+program
+  .version(packageInfo.version)
+
+program
+  .command('init')
+  .description('init the live config')
+  .action(() => {
+    CMD.INIT()
+  })
+
+program
+  .command('add [roomids...]')
+  .description('add roomids to listen(space to split)')
+  .action(roomids => {
+    CMD.ADD(roomids)
+      .then(() => console.log('添加成功'))
+  })
+
+program
+  .command('remove [roomids...]')
+  .description('remove roomids(space to split)')
+  .action(roomids => {
+    CMD.REMOVE(roomids)
+      .then(() => console.log('删除成功'))
+  })
+
+program
+  .command('list [config]')
+  .description('list config')
+  .action(config => {
+    console.log(CMD.LIST(config))
+  })
+
+program
+  .command('run')
+  .description('just run the listener once')
+  .action(() => {
+    CMD.SCRIPT()
+  })
+
+program
+  .command('task <command>')
+  .description('add task to crontab for minute monitor')
+  .action(command => {
+    CMD.TASK(command)
+  })
+
+program.parse(process.argv)
