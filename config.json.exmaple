@@ -9,5 +9,6 @@
     "to": "csvwolf@qq.com",
     "subject": "Hello World",
     "content": "Test"
-  }
+  },
+  "rooms": ["11111"]
 }
