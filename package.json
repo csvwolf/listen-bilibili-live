@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csvwolf/listen-bilibili-live.git"
+  },
   "dependencies": {
     "axios": "^0.16.1",
     "nodemailer": "^4.0.1"
