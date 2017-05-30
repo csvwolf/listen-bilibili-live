@@ -3,6 +3,7 @@ const path = require('path')
 const sendMail = require('../src/send-mail')
 const listenLive = require('../src/listen')
 const { mail, rooms } = require(`${process.cwd()}/config.json`)
+const logger = require('../src/logger')
 
 module.exports = function() {
   rooms.forEach(LIVE_ID => {
@@ -11,11 +12,11 @@ module.exports = function() {
       .then(data => {
         const status = require('../status.json')
         if (status.rooms[LIVE_ID] === data.LIVE_STATUS) {
-          console.log(new Date(), 'not changed')
+          logger.info('not changed')
           return {}
         }
         status.rooms[LIVE_ID] = data.LIVE_STATUS
-        console.log(new Date(), 'send mail...')
+        logger.info('send mail...')
         fs.writeFile(path.resolve(process.cwd(), 'status.json'), JSON.stringify(status), () => '')
         return sendMail(mail, {
           subject: `你所监听的主播 ${data.ANCHOR_NICK_NAME} 状态改变`,
@@ -26,7 +27,7 @@ module.exports = function() {
           `
         })
       })
-      .catch(e => console.log(e))
+      .catch(e => logger.error(e))
   })
 }
 
