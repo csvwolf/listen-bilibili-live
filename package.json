@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/csvwolf/listen-bilibili-live.git"
   },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha"
+  },
   "bin": {
     "bili_live": "index.js"
   },
