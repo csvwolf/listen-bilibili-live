@@ -1,0 +1,14 @@
+{
+  "mail": {
+    "service": "qq",
+    "auth": {
+      "user": "test",
+      "pass": ""
+    },
+    "from": "test的自动推送",
+    "to": "",
+    "subject": "Hello World",
+    "content": "Test"
+  },
+  "rooms": []
+}

@@ -1,8 +1,5 @@
 const should = require('chai').should()
-const fs = require('fs')
 const CMD = require('../commands/index')
-
-fs.writeFileSync(`${process.cwd()}/config.json`, JSON.stringify({ rooms: ['123'] }))
 
 describe('Command', () => {
   describe('#add', () => {
