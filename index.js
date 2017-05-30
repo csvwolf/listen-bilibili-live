@@ -16,7 +16,7 @@ listenLive(LIVE_ID)
     }
     status.rooms[LIVE_ID] = data.LIVE_STATUS
     console.log(new Date(), 'send mail...')
-    fs.writeFile(path.resolve('.') + '/status.json', JSON.stringify(status), () => '')
+    fs.writeFile(path.resolve(__dirname) + '/status.json', JSON.stringify(status), () => '')
     return sendMail(mailConfig, {
       subject: `你所监听的主播 ${data.ANCHOR_NICK_NAME} 状态改变`,
       html: `\
