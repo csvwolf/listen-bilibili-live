@@ -7,7 +7,7 @@
 
 ## 安装
 ```sh
-npm install -g bili-live
+npm install -g bili_live
 ```
 
 ## 使用
