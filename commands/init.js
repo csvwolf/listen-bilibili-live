@@ -1,6 +1,7 @@
 const inquirer = require('inquirer')
 const { services } = require('./mail-services.json')
 const fs = require('../libs/fs')
+const path = require('path')
 
 module.exports = async function() {
   let result = await inquirer.prompt([{
@@ -29,7 +30,7 @@ module.exports = async function() {
 
   result.rooms = []
 
-  return await fs.writeFile(`${process.cwd()}/config.json`, JSON.stringify(result))
+  return await fs.writeFile(path.resolve(__dirname, '../config.json'), JSON.stringify(result))
 }
 
 
