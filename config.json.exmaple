@@ -1,0 +1,13 @@
+{
+  "mail": {
+    "service": "qq",
+    "auth": {
+      "user": "csvwolf@qq.com",
+      "pass": ""
+    },
+    "from": "敖天羽的自动推送",
+    "to": "csvwolf@qq.com",
+    "subject": "Hello World",
+    "content": "Test"
+  }
+}
