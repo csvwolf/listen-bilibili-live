@@ -1,4 +1,6 @@
 # Listen_Live_Bilibili
+[![NPM](https://nodei.co/npm/bili_live.png)](https://nodei.co/npm/bili_live/)
+[![Build Status](https://travis-ci.org/csvwolf/listen-bilibili-live.svg?branch=master)](https://travis-ci.org/csvwolf/listen-bilibili-live)
 > Bilibili Live 监听，窥屏神器
 
 根据配置文件监听指定房间状态，状态变更时将进行邮件通知。
