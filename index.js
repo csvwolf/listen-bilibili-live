@@ -51,4 +51,18 @@ program
     CMD.TASK(command)
   })
 
+program
+  .command('backup <dist>')
+  .description('backup config to <dist> dir')
+  .action(dist => {
+    CMD.BACKUP(dist)
+  })
+
+program
+  .command('recover <src>')
+  .description('recover config from <src>')
+  .action(src => {
+    CMD.RECOVER(src)
+  })
+
 program.parse(process.argv)

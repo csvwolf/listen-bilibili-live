@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = function(method) {
   require('crontab').load((err, crontab) => {
     if (err) throw err

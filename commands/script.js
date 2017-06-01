@@ -13,6 +13,7 @@ module.exports = function() {
         const status = require('../status.json')
         if (status.rooms[LIVE_ID] === data.LIVE_STATUS) {
           logger.info('not changed')
+          logger.info(data)
           return {}
         }
         status.rooms[LIVE_ID] = data.LIVE_STATUS
