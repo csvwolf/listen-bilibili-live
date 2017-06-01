@@ -3,11 +3,11 @@ module.exports = function(method) {
     if (err) throw err
     switch (method) {
       case 'create':
-        crontab.create('bili_live run').minute().every(1)
+        crontab.create(`${process.execPath} ${path.resolve(__dirname, '../index.js')} run`).minute().every(1)
         console.log('注册完成')
         break
       case 'remove':
-        crontab.remove({ command: 'bili_live run' })
+        crontab.remove({ command: `${process.execPath} ${path.resolve(__dirname, '../index.js')} run` })
         console.log('删除完毕')
         break
     }
