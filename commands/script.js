@@ -10,12 +10,13 @@ module.exports = function() {
     listenLive(LIVE_ID)
       .then(({ data }) => data.data)
       .then(data => {
+        if (!data) return {}
         const status = require('../status.json')
         if (status.rooms[LIVE_ID] === data.LIVE_STATUS) {
           logger.info('not changed')
-          logger.info(data)
           return {}
         }
+        logger.info(data)
         status.rooms[LIVE_ID] = data.LIVE_STATUS
         logger.info('send mail...')
         fs.writeFile(path.resolve(__dirname, '../status.json'), JSON.stringify(status), () => '')
